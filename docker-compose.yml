@@ -1,0 +1,11 @@
+version: '3'
+services:
+  telimongo:
+    image: mongo
+    volumes:
+      - puttirinki-data-dev:/data
+    ports:
+      - 27017:27017
+volumes:
+  puttirinki-data-dev:
+    driver: local
