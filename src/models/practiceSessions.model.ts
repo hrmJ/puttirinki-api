@@ -1,21 +1,30 @@
 import { Application } from '../declarations';
 import { Model, Mongoose } from 'mongoose';
 
+export type practiceSession = {
+  right: number;
+  left: number;
+  top: number;
+  bottom: number;
+  hit: number;
+};
+
 export default function (app: Application): Model<any> {
-  const modelName = 'users';
+  const modelName = 'practiceSessions';
   const mongooseClient: Mongoose = app.get('mongooseClient');
   const schema = new mongooseClient.Schema(
     {
-      email: { type: String, unique: true, lowercase: true },
-      password: { type: String },
+      right: { type: Number },
+      left: { type: Number },
+      top: { type: Number },
+      bottom: { type: Number },
+      hit: { type: Number },
     },
     {
       timestamps: true,
     },
   );
 
-  // This is necessary to avoid model compilation errors in watch mode
-  // see https://mongoosejs.com/docs/api/connection.html#connection_Connection-deleteModel
   if (mongooseClient.modelNames().includes(modelName)) {
     (mongooseClient as any).deleteModel(modelName);
   }
