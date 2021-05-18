@@ -5,4 +5,15 @@ describe('practiceSessions service', () => {
     const service = app.service('practiceSessions');
     expect(service).toBeTruthy();
   });
+
+  it('creates a practiceSession', async () => {
+    expect.assertions(1);
+    const session = await app.service('practiceSessions').create({
+      top: 0,
+      left: 0,
+      right: 2,
+      bottom: 0,
+    });
+    expect(session.right).toEqual(2);
+  });
 });

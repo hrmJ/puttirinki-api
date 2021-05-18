@@ -6,6 +6,14 @@ services:
       - puttirinki-data-dev:/data
     ports:
       - 27017:27017
+  mongo-test:
+    image: mongo
+    volumes:
+      - puttirinki-data-test:/data
+    ports:
+      - 27018:27017
 volumes:
   puttirinki-data-dev:
+    driver: local
+  puttirinki-data-test:
     driver: local

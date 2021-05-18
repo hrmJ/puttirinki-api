@@ -28,7 +28,7 @@
     "lint": "eslint src/. test/. --config .eslintrc.json --ext .ts --fix",
     "dev": "ts-node-dev --no-notify src/",
     "start": "npm run compile && node lib/",
-    "clean": "shx rm -rf test/data/",
+    "clean": "docker-compose exec mongo-test mongo puttirinki_api --eval 'printjson(db.dropDatabase())'",
     "jest": "npm run clean && NODE_ENV=test jest --forceExit",
     "compile": "shx rm -rf lib/ && tsc"
   },

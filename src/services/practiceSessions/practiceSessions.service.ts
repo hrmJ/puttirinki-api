@@ -1,6 +1,7 @@
 import { Application } from '../../declarations';
 import { PracticeSessions } from './practiceSessions.class';
-import createModel from '../../models/users.model';
+import createModel from '../../models/practiceSessions.model';
+import { ServiceAddons } from '@feathersjs/feathers';
 
 declare module '../../declarations' {
   interface ServiceTypes {

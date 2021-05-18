@@ -1,5 +1,5 @@
 {
-  "nedb": "../test/data",
   "host": "localhost",
-  "port": 9090
+  "port": 9090,
+  "mongodb": "mongodb://localhost:27018/puttirinki_api"
 }
