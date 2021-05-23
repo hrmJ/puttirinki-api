@@ -26,21 +26,22 @@ export class PracticeSessions extends Service {
       return null;
     }
 
-    return await this.db.practicesessions.aggregate([
-      { $match: { user: new Schema.Types.ObjectId('60a897bac4ba771702a3e9c8') } },
+    const res = await this.db.models.practiceSessions.aggregate([
+      { $match: { user: userId } },
       {
         $group: {
           _id: null,
-          count: { $sum: 1 },
+          sessionCount: { $sum: 1 },
           hit: { $sum: '$hit' },
           left: { $sum: '$left' },
           right: { $sum: '$right' },
           top: { $sum: '$top' },
           bottom: { $sum: '$bottom' },
-          amount: { $sum: { $add: ['$hit', '$bottom', '$top', '$left', '$right'] } },
+          total: { $sum: { $add: ['$hit', '$bottom', '$top', '$left', '$right'] } },
         },
       },
     ]);
+    return res.length ? res[0] : { error: 'no user data found' };
   }
 
   async find(params: Params): Promise<any> {
