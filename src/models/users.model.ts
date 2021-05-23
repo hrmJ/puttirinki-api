@@ -1,13 +1,26 @@
 import { Application } from '../declarations';
-import { Model, Mongoose } from 'mongoose';
+import { Model, Mongoose, Schema, Document } from 'mongoose';
+import { PracticeSessionData } from '../services/practiceSessions/practiceSessions.class';
 
-export default function (app: Application): Model<any> {
+interface IUser extends Document {
+  email: string;
+  password: string;
+  practiceSessions: PracticeSessionData[];
+}
+
+export default function (app: Application): Model<IUser> {
   const modelName = 'users';
   const mongooseClient: Mongoose = app.get('mongooseClient');
-  const schema = new mongooseClient.Schema(
+  const schema: Schema = new mongooseClient.Schema(
     {
       email: { type: String, unique: true, lowercase: true },
       password: { type: String },
+      practiceSessions: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'practiceSession',
+        },
+      ],
     },
     {
       timestamps: true,

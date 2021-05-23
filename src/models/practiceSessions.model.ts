@@ -1,5 +1,5 @@
 import { Application } from '../declarations';
-import { Model, Mongoose } from 'mongoose';
+import { Model, Mongoose, Schema } from 'mongoose';
 
 export type practiceSession = {
   right: number;
@@ -7,6 +7,7 @@ export type practiceSession = {
   top: number;
   bottom: number;
   hit: number;
+  user: Schema.Types.ObjectId;
 };
 
 export default function (app: Application): Model<any> {
@@ -19,6 +20,7 @@ export default function (app: Application): Model<any> {
       top: { type: Number },
       bottom: { type: Number },
       hit: { type: Number },
+      user: { type: Schema.Types.ObjectId, ref: 'user' },
     },
     {
       timestamps: true,

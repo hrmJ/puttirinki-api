@@ -13,6 +13,7 @@ describe('practiceSessions service', () => {
       left: 0,
       right: 2,
       bottom: 0,
+      hit: 0,
     });
     expect(session.right).toEqual(2);
   });

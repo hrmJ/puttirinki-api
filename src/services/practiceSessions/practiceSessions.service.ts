@@ -2,6 +2,7 @@ import { Application } from '../../declarations';
 import { PracticeSessions } from './practiceSessions.class';
 import createModel from '../../models/practiceSessions.model';
 import { ServiceAddons } from '@feathersjs/feathers';
+import hooks from './practiceSessions.hooks';
 
 declare module '../../declarations' {
   interface ServiceTypes {
@@ -16,5 +17,6 @@ export default function (app: Application): void {
   };
 
   app.use('/practiceSessions', new PracticeSessions(options, app));
-  app.service('practiceSessions');
+  const service = app.service('practiceSessions');
+  service.hooks(hooks);
 }
