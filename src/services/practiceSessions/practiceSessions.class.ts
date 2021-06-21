@@ -9,7 +9,7 @@ export type PracticeSessionData = {
   top: number;
   bottom: number;
   hit: number;
-  user: Schema.Types.ObjectId;
+  user: Schema.Types.ObjectId | null;
 };
 
 export class PracticeSessions extends Service {
@@ -49,7 +49,7 @@ export class PracticeSessions extends Service {
     return this.compileStats(user);
   }
 
-  async create(data: PracticeSessionData, params?: Params): Promise<PracticeSessions> {
+  async create(data: PracticeSessionData, params?: Params): Promise<PracticeSessionData> {
     const user = params?.user;
     data.user = params?.user?._id;
     const session = await super.create({ ...data }, params);

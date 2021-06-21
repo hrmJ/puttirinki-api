@@ -7,7 +7,9 @@ describe('authentication', () => {
 
   describe('local strategy', () => {
     const userInfo = {
-      email: 'someone@example.com',
+      name: 'Testy Tester',
+      username: 'thisuser',
+      email: 'thisuser2@aaa.com',
       password: 'supersecret',
     };
 
@@ -23,7 +25,8 @@ describe('authentication', () => {
       const { user, accessToken } = await app.service('authentication').create(
         {
           strategy: 'local',
-          ...userInfo,
+          username: 'thisuser',
+          password: 'supersecret',
         },
         {},
       );

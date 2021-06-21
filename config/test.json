@@ -1,5 +1,24 @@
 {
   "host": "localhost",
   "port": 9090,
-  "mongodb": "mongodb://localhost:27018/puttirinki_api"
+  "mongodb": "mongodb://localhost:27018/puttirinki_api",
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "Y7DgCuyle/Nx1AvihPiZKjIlDFI=",
+    "authStrategies": ["jwt", "local"],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "\\username",
+      "passwordField": "password"
+    }
+  }
 }
