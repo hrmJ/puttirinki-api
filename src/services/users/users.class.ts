@@ -10,7 +10,7 @@ export class Users extends Service {
 
   async get(id: string): Promise<Pick<IUser, '_id' | 'name'>> {
     const user = await super.get(id);
-    const { _id, name } = user;
-    return { _id, name: 'TODO test' };
+    const { _id, username } = user;
+    return { _id, name: username };
   }
 }
