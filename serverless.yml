@@ -13,9 +13,5 @@ provider:
 functions:
   app:
     handler: lib/prod.handler
-    environment: 
-      MONGO_URI: ${ssm:/mongo-uri} 
-      MONGO_PASS: ${ssm:/mongo-pass~true} 
-      MONGO_UNAME: ${ssm:/mongo-uname~true} 
     events:
       - http: ANY /
