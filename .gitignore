@@ -115,3 +115,10 @@ lib/
 data/
 test/data
 node_modules
+
+
+
+jspm_packages
+
+# Serverless directories
+.serverless
