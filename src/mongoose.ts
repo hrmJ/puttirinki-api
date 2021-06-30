@@ -3,6 +3,7 @@ import { Application } from './declarations';
 import logger from './logger';
 import dotenv from 'dotenv';
 dotenv.config();
+console.log(process.env, 'HOO');
 
 export default function (app: Application): void {
   mongoose
