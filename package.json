@@ -30,7 +30,8 @@
     "start": "npm run compile && node lib/",
     "clean": "docker-compose exec mongo-test mongo puttirinki_api --eval 'printjson(db.dropDatabase())'",
     "jest": "npm run clean && NODE_ENV=test jest --forceExit",
-    "compile": "shx rm -rf lib/ && tsc"
+    "compile": "shx rm -rf lib/ && tsc",
+    "deploy": "npm run compile && sls deploy"
   },
   "standard": {
     "env": [
@@ -49,6 +50,7 @@
     "@feathersjs/feathers": "^4.5.11",
     "@feathersjs/socketio": "^4.5.11",
     "@feathersjs/transport-commons": "^4.5.11",
+    "aws4": "^1.11.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
