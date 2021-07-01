@@ -14,3 +14,4 @@ functions:
     handler: lib/prod.handler
     events:
       - http: ANY /
+      - http: 'ANY /{proxy+}'
