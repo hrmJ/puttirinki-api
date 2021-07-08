@@ -9,6 +9,7 @@ export type PracticeSessionData = {
   top: number;
   bottom: number;
   hit: number;
+  distance: number;
   user: Schema.Types.ObjectId | null;
 };
 

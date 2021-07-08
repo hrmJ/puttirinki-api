@@ -6,6 +6,7 @@ export type practiceSession = {
   left: number;
   top: number;
   bottom: number;
+  distance: number;
   hit: number;
   user: Schema.Types.ObjectId;
 };
@@ -20,6 +21,7 @@ export default function (app: Application): Model<any> {
       top: { type: Number },
       bottom: { type: Number },
       hit: { type: Number },
+      distance: { type: Number },
       user: { type: Schema.Types.ObjectId, ref: 'user' },
     },
     {
