@@ -7,7 +7,7 @@ describe('practiceSessions service', () => {
   });
 
   it('creates a practiceSession', async () => {
-    expect.assertions(1);
+    expect.assertions(2);
     const session = await app.service('practiceSessions').create({
       top: 0,
       left: 0,
@@ -15,7 +15,9 @@ describe('practiceSessions service', () => {
       bottom: 0,
       hit: 0,
       user: null,
+      distance: 5,
     });
     expect(session.right).toEqual(2);
+    expect(session.distance).toEqual(5);
   });
 });
