@@ -9,7 +9,7 @@ export type PracticeSessionData = {
   top: number;
   bottom: number;
   hit: number;
-  distance: number;
+  distance: string;
   user: Schema.Types.ObjectId | null;
 };
 
@@ -22,13 +22,16 @@ export class PracticeSessions extends Service {
     this.db = app.get('mongooseClient');
   }
 
-  async compileStats(userId: string): Promise<any> {
+  async compileStats(userId: string, distance: string, operator: string): Promise<any> {
     if (!userId) {
       return null;
     }
 
+    // const distanceFilter = getDistanceFilter(distance, operator);
+    // distance: { $lte: parseInt(distance || '0') }
+
     const res = await this.db.models.practiceSessions.aggregate([
-      { $match: { user: userId } },
+      { $match: { $and: [{ user: userId, distance: { [operator]: Number(distance) } }] } },
       {
         $group: {
           _id: null,
@@ -38,6 +41,7 @@ export class PracticeSessions extends Service {
           right: { $sum: '$right' },
           top: { $sum: '$top' },
           bottom: { $sum: '$bottom' },
+          distance: { $first: distance },
           total: { $sum: { $add: ['$hit', '$bottom', '$top', '$left', '$right'] } },
         },
       },
@@ -47,13 +51,16 @@ export class PracticeSessions extends Service {
 
   async find(params: Params): Promise<any> {
     const user = params?.user?._id;
-    return this.compileStats(user);
+    const distance: string = params?.query?.distance;
+    const operator: string = params?.query?.operator || '$eq';
+    return this.compileStats(user, distance, operator);
   }
 
   async create(data: PracticeSessionData, params?: Params): Promise<PracticeSessionData> {
     const user = params?.user;
     data.user = params?.user?._id;
-    const session = await super.create({ ...data }, params);
+    const distance = parseInt(data.distance);
+    const session = await super.create({ ...data, distance }, params);
     if (user) {
       await this.db.models.users.findByIdAndUpdate(user._id, { $push: { practiceSessions: session._id } });
     }
